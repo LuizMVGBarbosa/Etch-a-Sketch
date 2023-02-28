@@ -1,6 +1,16 @@
 let frame = document.querySelector('.frame')
+let Nsquare = document.getElementsByTagName("input")
+let button = document.querySelector('.squareChoice')
+
+button.addEventListener("click", function buildNew() {
+    while(frame.firstChild){
+        frame.removeChild(frame.firstChild);
+    };
+    workFrameGenerator(Nsquare[0].value);
+});
 
 function workFrameGenerator(number){
+    
     for(let i=1;i<=number;i++){
         let unit = document.createElement('div');
         const Nfather= document.createAttribute("class")
@@ -35,4 +45,3 @@ function makeTheSonsReady(number){
       
     }
 };}
-workFrameGenerator(16);
