@@ -1,17 +1,23 @@
 let frame = document.querySelector('.frame')
 let Nsquare = document.getElementsByTagName("input")
-let button = document.querySelector('.squareChoice')
+let question =document.querySelector('.question')
+let lastfunction= null;
+let lastargs =[];
 
-button.addEventListener("click", function buildNew() {
-    while(frame.firstChild){
-        frame.removeChild(frame.firstChild);
-    };
-    workFrameGenerator(Nsquare[0].value);
+function clean(){
+  while(frame.firstChild){
+    frame.removeChild(frame.firstChild);
+};
+}
+
+Nsquare[0].addEventListener("mouseup", function buildNew() {
+   clean();
+   workFrameGenerator(Nsquare[0].value);
+
 });
 
 function workFrameGenerator(number){
-    
-    for(let i=1;i<=number;i++){
+       for(let i=1;i<=number;i++){
         let unit = document.createElement('div');
         const Nfather= document.createAttribute("class")
         Nfather.value = `father${i}`;
@@ -26,22 +32,43 @@ function workFrameGenerator(number){
             Nson.value=`son${j}`;
             sonsUnit.setAttributeNode(Nson);
             sonsUnit.classList.add('sonsUnit');
-        }
-
-       
+        }   
     }
-     makeTheSonsReady(number);
-
+    if (lastfunction!= null){
+      lastfunction(Nsquare[0].value,lastargs);}
 };
 
+let colorchoice = document.querySelector('.colorChoice');
+    colorchoice.addEventListener("input", () =>{makeTheSonsReady(Nsquare[0].value,colorchoice.value)});
 
-function makeTheSonsReady(number){
+let Eraser = document.querySelector('.Eraser')
+  Eraser.addEventListener("click",() =>{makeTheSonsReady(Nsquare[0].value,"White")});
+
+function makeTheSonsReady(number,modechoice){
+    const colorchose = modechoice
     for(let i=1;i<=number;i++){
       let father = frame.querySelector(`.father${i}`);
       for(let j=1;j<=number;j++){
         let son = father.querySelector(`.son${j}`)
-        son.addEventListener("mouseover",() =>{son.style.backgroundColor="Black"})
-      
-      
-    }
-};}
+        son.addEventListener("mouseover",() =>{son.style.backgroundColor=colorchose;})
+      }
+}
+    lastfunction=makeTheSonsReady;
+    lastargs =[colorchose]
+}
+let rainbow = document.querySelector('.rainbow')
+rainbow.addEventListener("click",()=>{makeTheSonsRainbow(Nsquare[0].value,)})
+function makeTheSonsRainbow(number){
+ 
+    for(let i=1;i<=number;i++){
+      let father = frame.querySelector(`.father${i}`);
+      for(let j=1;j<=number;j++){
+        let son = father.querySelector(`.son${j}`)
+        son.addEventListener("mouseover",() =>{son.style.backgroundColor= `hsl(${Math.random() * 360}, 100%, 50%)`;})
+      };
+    };
+    lastfunction=makeTheSonsRainbow;
+}
+
+workFrameGenerator(16);
+makeTheSonsReady(Nsquare[0].value,"Black");
