@@ -1,8 +1,10 @@
 let frame = document.querySelector('.frame')
 let Nsquare = document.getElementsByTagName("input")
 let question =document.querySelector('.question')
+let squareChoice = document.querySelector('.squareChoice')
 let lastfunction= null;
 let lastargs =[];
+
 
 function clean(){
   while(frame.firstChild){
@@ -17,6 +19,7 @@ Nsquare[0].addEventListener("mouseup", function buildNew() {
 });
 
 function workFrameGenerator(number){
+       squareChoice.textContent = `${Nsquare[0].value}\X${Nsquare[0].value}`
        for(let i=1;i<=number;i++){
         let unit = document.createElement('div');
         const Nfather= document.createAttribute("class")
@@ -42,7 +45,7 @@ let colorchoice = document.querySelector('.colorChoice');
     colorchoice.addEventListener("input", () =>{makeTheSonsReady(Nsquare[0].value,colorchoice.value)});
 
 let Eraser = document.querySelector('.Eraser')
-  Eraser.addEventListener("click",() =>{makeTheSonsReady(Nsquare[0].value,"White")});
+  Eraser.addEventListener("click",() =>{makeTheSonsReady(Nsquare[0].value,'rgba(255,255,255,0')});
 
 function makeTheSonsReady(number,modechoice){
     const colorchose = modechoice
@@ -56,6 +59,7 @@ function makeTheSonsReady(number,modechoice){
     lastfunction=makeTheSonsReady;
     lastargs =[colorchose]
 }
+
 let rainbow = document.querySelector('.rainbow')
 rainbow.addEventListener("click",()=>{makeTheSonsRainbow(Nsquare[0].value,)})
 function makeTheSonsRainbow(number){
@@ -68,7 +72,7 @@ function makeTheSonsRainbow(number){
       };
     };
     lastfunction=makeTheSonsRainbow;
-}
+};
 
 workFrameGenerator(16);
-makeTheSonsReady(Nsquare[0].value,"Black");
+makeTheSonsReady(Nsquare[0].value,'rgba(0,0,0,9)');
